@@ -3,15 +3,19 @@ package de.hsMannheim.tpe.ss17.gruppe24.uebung1;
 import static gdi.MakeItSimple.*;
 
 public class BTreeMenu {
-	static BTree tree1;
-	static BTree tree2;
-	static BTree tree3;
 	
-	static BTree currentTree;
+	static BTree[] workingTree;
+	
+	static int treeIndex;
 	
 	public static void main(String[] args) {
 
-		currentTree = tree1;
+		workingTree = new BTree[3];
+		workingTree[0] = new MyBTree(1);
+		workingTree[1] = new MyBTree(1);
+		workingTree[2] = new MyBTree(1);
+		
+		treeIndex = 0;
 		
 		while (true) {
 			makeMenu();
@@ -20,9 +24,15 @@ public class BTreeMenu {
 	}
 
 	public static void makeMenu() {
-
+		
+	
+		
+		
+		
 		println("------------------- Menü -------------------");
-		println("1: Create new BTree"); // calls method toString
+		println("current working tree: "+ treeIndex);
+		
+		println("1: Create new BTree at index " + treeIndex); // calls method toString
 		println("2: boolean insert(Integer o)");
 		println("3: boolean insert(String filename)");
 		println("4: boolean contains(Integer o)");
@@ -44,108 +54,102 @@ public class BTreeMenu {
 		switch (selection) {
 		case 1:
 			println("Enter order of BTree:");
-			currentTree = new MyBTree(readInt());
+			workingTree[treeIndex] = new MyBTree(readInt());
 			break;
 		case 2:
-			if(currentTree != null){
+			if(workingTree[treeIndex] != null){
 			println("Enter value to insert:");
-			println(currentTree.insert(readInt()));
+			println(workingTree[treeIndex].insert(readInt()));
 			} else {
 				println("The working tree is not initialised");
 			}
 			
 			break;
 		case 3:
-			if(currentTree != null){
+			if(workingTree[treeIndex] != null){
+			readLine();
 			println("Enter the path of the file to insert:");
-			println(currentTree.insert(readLine()));
+			println(workingTree[treeIndex].insert(readLine()));
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 4:
-			if(currentTree != null){
+			if(workingTree[treeIndex] != null){
 			println("Enter value to search for:");
-			println(currentTree.contains(readInt()));
+			println(workingTree[treeIndex].contains(readInt()));
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 5:
-			if(currentTree != null){
-			println(currentTree.size());
+			if(workingTree[treeIndex] != null){
+			println(workingTree[treeIndex].size());
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 6:
-			if(currentTree != null){
-			println(currentTree.height());
+			if(workingTree[treeIndex] != null){
+			println(workingTree[treeIndex].height());
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 7:
-			if(currentTree != null){
-			println(currentTree.getMax());
+			if(workingTree[treeIndex] != null){
+			println(workingTree[treeIndex].getMax());
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 8:
-			if(currentTree != null){
-			println(currentTree.getMin());
+			if(workingTree[treeIndex] != null){
+			println(workingTree[treeIndex].getMin());
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 9:
-			if(currentTree != null){
-			println(currentTree.isEmpty());
+			if(workingTree[treeIndex] != null){
+			println(workingTree[treeIndex].isEmpty());
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 10:
-			if(currentTree != null){
+			if(workingTree[treeIndex] != null){
 			println("Enter the index of the tree to add:");
 			int index = readInt();
-			BTree otherTree = new MyBTree(1);
-			if(index == 1) 
-				otherTree = tree1;
-			if(index == 2) 
-				otherTree = tree2;
-			if(index == 1) 
-				otherTree = tree3;
-			currentTree.addAll(otherTree);
+			workingTree[treeIndex].addAll(workingTree[index]);
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 11:
-			if(currentTree != null){
-			currentTree.printInorder();
+			if(workingTree[treeIndex] != null){
+				workingTree[treeIndex].printInorder();
 			} else {
 				println("The working tree is not initialised");
 			}
 			break;
 		case 12:
-			if(currentTree != null){
-				currentTree.printPostorder();
+			if(workingTree[treeIndex] != null){
+				workingTree[treeIndex].printPostorder();
 				} else {
 					println("The working tree is not initialised");
 				}
 			break;
 		case 13:
-			if(currentTree != null){
-				currentTree.printPreorder();
+			if(workingTree[treeIndex] != null){
+				workingTree[treeIndex].printPreorder();
 				} else {
 					println("The working tree is not initialised");
 				}
 			break;
 		case 14:
-			if(currentTree != null){
-				currentTree.printLevelorder();
+			if(workingTree[treeIndex] != null){
+				workingTree[treeIndex].printLevelorder();
 				} else {
 					println("The working tree is not initialised");
 				}
@@ -153,25 +157,19 @@ public class BTreeMenu {
 		case 15:
 			println("Clone current tree to which index?");
 			int clone = readInt();
-			if(clone == 1) 
-				tree1 = currentTree.clone();
-			if(clone == 2) 
-				tree2 = currentTree.clone();
-			if(clone == 1) 
-				tree3 = currentTree.clone();
+			workingTree[clone] = workingTree[treeIndex].clone();
 			break;
 			
 			
 		case 16:
-			println("Enter index of tree to change to (1 - 3), default is 1:");
+			println("Enter index of tree to change to (0 - 2)");
 			int index = readInt();
-			if(index == 1) 
-				currentTree = tree1;
-			if(index == 2) 
-				currentTree = tree2;
-			if(index == 1) 
-				currentTree = tree3;
-			
+			if(index < 0 || index > 2){
+			println("index out of bounds.");
+			break;
+			}
+			else
+				treeIndex = index;
 			break;
 		default:
 			break;
