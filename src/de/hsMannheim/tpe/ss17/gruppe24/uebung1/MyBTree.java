@@ -326,19 +326,53 @@ private void getGivenLevel(Node currentNode, int level, Integer[] data) {
 
 	@Override
 	public void printInorder() {
-		// TODO Auto-generated method stub
-
+		if(!isEmpty()){
+			printInorder(this.root);
+			println();
+		}
+	}
+	
+	private void printInorder(Node currentNode){
+		for(int i = 0; i < currentNode.children.length && currentNode.children[i+1] != null; i++){
+			printInorder(currentNode.children[i]);
+		}
+		if(currentNode != null){
+			printDataofNode(currentNode);
+		}
 	}
 
 	@Override
 	public void printPostorder() {
-		// TODO Auto-generated method stub
-
+		if(!isEmpty()){
+			printPostorder(this.root);
+			println();
+		}
+	}
+	
+	private void printPostorder(Node currentNode){
+		for(int i = 0; i < currentNode.children.length && currentNode.children[i+1] != null; i++){
+			printPostorder(currentNode.children[i]);
+		}
+		if(currentNode != null){
+			printDataofNode(currentNode);
+		}
 	}
 
 	@Override
 	public void printPreorder() {
-		// TODO Auto-generated method stub
+		if(!isEmpty()){
+			printPreorder(this.root);
+			println();
+		}
+	}
+	
+	private void printPreorder(Node currentNode){
+		if(currentNode != null){
+			printDataofNode(currentNode);
+		}
+		for(int i = 0; i < currentNode.children.length && currentNode.children[i+1] != null; i++){
+			printInorder(currentNode.children[i]);
+		}
 	}
 
 	@Override
@@ -368,5 +402,21 @@ private void getGivenLevel(Node currentNode, int level, Integer[] data) {
 		}
 		System.out.print("    ");
 	}
+	
+	@Override
+	public BTree clone(){
+		Integer[] data = this.getAll();
+		BTree clone = new MyBTree(this.order);
+		
+		for(Integer current : data){
+		clone.insert(current);	
+		}
+		
+		
+		return clone;
+	}
+	
+
+	
 
 }
