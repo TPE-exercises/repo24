@@ -319,24 +319,27 @@ public class MyBTree implements BTree {
 		}
 	}
 
-	@Override
-	public void printInorder() {
-		if (!isEmpty()) {
-			printInorder(this.root);
-			println();
-		}
-	}
-
-	private void printInorder(Node currentNode) {
-		if (currentNode != null) {
-			for (int i = 0; i < currentNode.children.length; i++) {
-				if (currentNode.children[i] != null)
-					printInorder(currentNode.children[i]);
-			}
-
-			printDataofNode(currentNode);
-		}
-	}
+	 @Override
+	    public void printInorder() {
+	        if (!isEmpty()) {
+	            printInorder(this.root);
+	            println();
+	        }
+	    }
+	 
+	    private void printInorder(Node currentNode) {
+	        if (currentNode != null) {
+	            for (int i = 0; i < currentNode.children.length; i++) {
+	                if (currentNode.children[i] != null){
+	                    printInorder(currentNode.children[i]);
+	                }
+	               
+	                if(i < currentNode.numberOfData){
+	                    System.out.print(" " + currentNode.data[i] + " ");
+	                }
+	            }
+	        }
+	    }
 
 	@Override
 	public void printPostorder() {
@@ -347,14 +350,14 @@ public class MyBTree implements BTree {
 	}
 
 	private void printPostorder(Node currentNode) {
-		if (currentNode != null) {
+		if (!currentNode.isLeaf) {
 			for (int i = 0; i < currentNode.children.length; i++) {
 				if (currentNode.children[i] != null)
 					printPostorder(currentNode.children[i]);
 			}
-
-			printDataofNode(currentNode);
 		}
+			printDataofNode(currentNode);
+		
 	}
 
 	@Override
