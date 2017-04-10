@@ -35,7 +35,7 @@ public class MyBTree implements BTree {
 				newNode.children[i].parent = newNode;
 			}
 
-			for (int i = currentNode.data.length / 2 + 1; i < currentNode.data.length; i++) {
+			for (int i = currentNode.children.length / 2 ; i < currentNode.children.length; i++) {
 				currentNode.children[i] = null;
 			}
 		}
