@@ -11,7 +11,10 @@ public class MyBTree implements BTree {
 	private int dataIndex;
 
 	public MyBTree(int order) {
-		this.order = order;
+		if (order < 1)
+			this.order = 1;
+		else
+			this.order = order;
 
 	}
 
@@ -319,27 +322,27 @@ public class MyBTree implements BTree {
 		}
 	}
 
-	 @Override
-	    public void printInorder() {
-	        if (!isEmpty()) {
-	            printInorder(this.root);
-	            println();
-	        }
-	    }
-	 
-	    private void printInorder(Node currentNode) {
-	        if (currentNode != null) {
-	            for (int i = 0; i < currentNode.children.length; i++) {
-	                if (currentNode.children[i] != null){
-	                    printInorder(currentNode.children[i]);
-	                }
-	               
-	                if(i < currentNode.numberOfData){
-	                    System.out.print(" " + currentNode.data[i] + " ");
-	                }
-	            }
-	        }
-	    }
+	@Override
+	public void printInorder() {
+		if (!isEmpty()) {
+			printInorder(this.root);
+			println();
+		}
+	}
+
+	private void printInorder(Node currentNode) {
+		if (currentNode != null) {
+			for (int i = 0; i < currentNode.children.length; i++) {
+				if (currentNode.children[i] != null) {
+					printInorder(currentNode.children[i]);
+				}
+
+				if (i < currentNode.numberOfData) {
+					System.out.print(" " + currentNode.data[i] + " ");
+				}
+			}
+		}
+	}
 
 	@Override
 	public void printPostorder() {
@@ -356,8 +359,8 @@ public class MyBTree implements BTree {
 					printPostorder(currentNode.children[i]);
 			}
 		}
-			printDataofNode(currentNode);
-		
+		printDataofNode(currentNode);
+
 	}
 
 	@Override
@@ -422,7 +425,7 @@ public class MyBTree implements BTree {
 
 	private Node cloneNode(Node toClone, Node clonedParent) {
 
-		Node clone = new Node((toClone.data.length - 1) / 2, clonedParent, clonedParent != null);
+		Node clone = new Node((toClone.data.length - 1) / 2, clonedParent, toClone.isLeaf);
 
 		clone.data = toClone.data.clone();
 		clone.numberOfData = toClone.numberOfData;
