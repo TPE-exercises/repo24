@@ -1,4 +1,4 @@
-package de.hsMannheim.tpe.gruppe24.ss17.uebung2.blatt2;
+package de.hsMannheim.tpe.ss17.gruppe24.uebung2.blatt2;
 
 // can somebody tell me the sense of this? Integer implements already Comparable
 public class MyInt implements Comparable<MyInt> {

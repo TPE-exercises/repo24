@@ -1,4 +1,4 @@
-package de.hsMannheim.tpe.gruppe24.ss17.uebung2.blatt2;
+package de.hsMannheim.tpe.ss17.gruppe24.uebung2.blatt2;
 
 public class CrypterCaesar implements Crypter {
 
