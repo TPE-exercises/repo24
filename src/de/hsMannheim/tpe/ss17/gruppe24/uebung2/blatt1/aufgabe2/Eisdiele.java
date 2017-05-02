@@ -5,7 +5,9 @@ public abstract class Eisdiele {
 
 	protected Eis[] eisKarte;
 
-
+/**
+ * @return all icecream saved in a String array
+ */
 	public final String[] getEisKarte() {
 		String[] eisKarteString = new String[this.eisKarte.length];
 		for(int i = 0; i < eisKarteString.length; i++){
@@ -14,6 +16,10 @@ public abstract class Eisdiele {
 		return eisKarteString;
 	}
 
+	/**
+	 * Prints out all the interaction with the "Eisdiele"
+	 * @param eisName the icecream that was ordered
+	 */
 	public final void bestellen(String eisName) {
 		begruessen();
 
@@ -38,11 +44,25 @@ public abstract class Eisdiele {
 
 	}
 
+	
+	/**
+	 * should print the greeting to the customer
+	 */
 	public abstract void begruessen();
 
+	/**
+	 * should print the icecreamseller announcing the price of the icecream
+	 * @param preis price of the icecream
+	 */
 	public abstract void kassieren(double preis);
 
+	/**
+	 * print the farewell wish
+	 */
 	public abstract void verabschieden();
 
+	/**
+	 * print the apology if the desired icecream is not on the menu
+	 */
 	public abstract void entschuldigen();
 }

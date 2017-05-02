@@ -34,12 +34,19 @@ public abstract class Eis {
 		return this.preis;
 	}
 
+
 	public final String getBehaeltnis(){
 		return this.behaeltnis;
 	}
 	
+	/**
+	 * Print a sentence that explains how the correct "Behältnis" is chosen
+	 */
 	public abstract void vorbereiten();
 
+	/**
+	 * print how the icecream is made
+	 */
 	public final void fuellen() {
 		if (this.sorten.length == 1) {
 
@@ -53,21 +60,23 @@ public abstract class Eis {
 		}
 		if (this.sorten.length > 1) {
 
-			if (this.art.equals("Kugel")) {
+
 				print("Daraufhin füllt er nacheinander eine Kugel ");
 				for (int i = 0; i < this.sorten.length - 1; i++) {
 					print(this.sorten[i] + "eis");
-					if (i < this.extras.length - 2) {
+					if (i < this.sorten.length - 2) {
 						print(", ");
 					}
-
 				}
 
-				println("und " + this.sorten[this.sorten.length - 1] + "eis ein.");
-			}
+				println(" und " + this.sorten[this.sorten.length - 1] + "eis ein.");
+			
 		}
 	}
 
+	/**
+	 * print how the icecream is decorated
+	 */
 	public final void dekorieren() {
 		if(this.extras.length == 1){
 			println("Dann verfeinert er das Eis mit " + this.extras[0] + ".");

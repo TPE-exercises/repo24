@@ -33,6 +33,9 @@ public class Eis {
 		return this.preis;
 	}
 
+	/**
+	 * Print a sentence that explains how the correct "Behältnis" is chosen
+	 */
 	public void vorbereiten() {
 		if (this.behaeltnis.equals("Waffel") || this.behaeltnis.equals("Schüssel"))
 			println("Der Eisverkäufer nimmt eine " + this.behaeltnis + " in die Hand. ");
@@ -42,6 +45,10 @@ public class Eis {
 			println("Der Eisverkäufer nimmt ein " + this.behaeltnis + " in die Hand. ");
 	}
 
+	
+	/**
+	 * Print how the icecream is made
+	 */
 	public void fuellen() {
 		if (this.sorten.length == 1) {
 
@@ -49,27 +56,30 @@ public class Eis {
 				println("Daraufhin füllt er eine Portion " + this.sorten[0] + "spaghettieis ein.");
 			}
 
-			if (this.art.equals("Kugel")) {
+			if (this.art.equals("Kugeln")) {
 				println("Daraufhin füllt er eine Kugel " + this.sorten[0] + "eis ein.");
 			}
 		}
 		if (this.sorten.length > 1) {
 
-			if (this.art.equals("Kugel")) {
-				print("Daraufhin füllt er nacheinander eine Kugel ");
+				print("Daraufhin füllt er nacheinander eine Portion ");
 				for (int i = 0; i < this.sorten.length - 1; i++) {
 					print(this.sorten[i] + "eis");
-					if (i < this.extras.length - 2) {
+					if (i < this.sorten.length - 2) {
 						print(", ");
 					}
 
 				}
 
-				println("und " + this.sorten[this.sorten.length - 1] + "eis ein.");
-			}
+				println(" und " + this.sorten[this.sorten.length - 1] + "eis ein.");
+			
 		}
 	}
 
+	
+	/**
+	 * Print how the icecream is decorated
+	 */
 	public void dekorieren() {
 		if (this.extras.length == 1) {
 			println("Dann verfeinert er das Eis mit " + this.extras[0] + ".");

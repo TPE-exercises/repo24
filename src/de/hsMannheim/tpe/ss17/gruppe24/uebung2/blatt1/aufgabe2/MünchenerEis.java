@@ -4,9 +4,13 @@ import static gdi.MakeItSimple.println;
 
 public class MünchenerEis extends Eis {
 
+	public MünchenerEis(String name, double preis, String behaeltnis, String art, String[] sorten, String[] extras){
+		super(name, preis, behaeltnis, art, sorten, extras);
+	}
+	
 	@Override
 	public void vorbereiten() {
-		if (this.behaeltnis.equals("BierteigWaffel") || this.behaeltnis.equals("Schüssel"))
+		if (this.behaeltnis.equals("Waffel") || this.behaeltnis.equals("Schüssel"))
 			println("Der Eisverkäufer nimmt eine " + this.behaeltnis + " in die Hand. ");
 		else if (this.behaeltnis.equals("Becher") || this.behaeltnis.equals("Teller"))
 			println("Der Eisverkäufer nimmt einen " + this.behaeltnis + " in die Hand. ");

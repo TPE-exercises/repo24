@@ -7,17 +7,16 @@ public class KölnerEisdiele extends Eisdiele {
 		String[] sphagettiSorten = { "Vanille" };
 		String[] sphagettiExtras = { "Erdbeersoße", "Kokosflocken" };
 
-		String[] bananensplitSorten = { "Vanille", "Schokolade", "Erdbeer" };
-		String[] bananensplitExtras = { "Ananassyrup", "Schokoladensauce", "Erdbeersyrup", "Nusssplittern",
-				"Schlagsahne", "Kirschen" };
+		String[] melonenmixSorten = { "Vanille", "Melonen"};
+		String[] melonenmixExtras = { "Melonenstücken", "Kiwi", "Himbeeren" };
 
-		String[] nussbecherSorten = { "Nuss" };
-		String[] nussbecherExtras = { "Schokolinsen", "Schokoladensauce", "Krokant" };
+		String[] tiramisubecherSorten = { "Tiramisu", "Vanille" };
+		String[] tiramisubecherExtras = { "Sahne, Kakaopulver, Marsalalikör, Löffelbiskuits" };
 
 		this.eisKarte = new KölnerEis[] {
 				new KölnerEis("Spaghettieis", 5.0, "Teller", "Spaghettis", sphagettiSorten, sphagettiExtras),
-				new KölnerEis("Bananensplit", 7.5, "Teller", "Kugeln", bananensplitSorten, bananensplitExtras),
-				new KölnerEis("Nussbecher", 4.5, "Glas", "Kugeln", nussbecherSorten, nussbecherExtras) };
+				new KölnerEis("Melonenmix", 7, "Teller", "Kugeln", melonenmixSorten, melonenmixExtras),
+				new KölnerEis("Tiramisubecher", 8, "Becher", "Kugeln", tiramisubecherSorten, tiramisubecherExtras) };
 	}
 	
 	@Override
