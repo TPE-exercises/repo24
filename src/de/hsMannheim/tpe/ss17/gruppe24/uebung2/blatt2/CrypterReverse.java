@@ -15,7 +15,7 @@ public class CrypterReverse implements Crypter {
 	static private String reverseString(String string){
 		String reverse = new String();
 
-		for(int i = string.length() - 1; i > 0; i--){ //iterate backwards through the string
+		for(int i = string.length() - 1; i >= 0; i--){ //iterate backwards through the string
 			reverse += string.charAt(i); // append char to the end of the string
 		}
 
