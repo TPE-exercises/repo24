@@ -18,15 +18,14 @@ public class CeasarWriter extends FilterWriter {
 
 	@Override
 	public void write(int c) throws IOException{
-		String stringC = "" + (char) c;
-		String encrypted = secure.encrypt(stringC);
+		String encrypted = secure.encrypt(Character.toString((char)c));
 		super.write(encrypted.charAt(0));
 	}
 	
 	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
-		String string = secure.encrypt(String.valueOf(cbuf));
-		super.write(string.toCharArray(), off, len);
+		String encrypted = secure.encrypt(new String(cbuf));
+		super.write(encrypted.toCharArray(), off, len);
 	}
 	
 	@Override

@@ -16,9 +16,24 @@ public class CeasarReader extends FilterReader {
 	@Override
 	public int read() throws IOException {
 		int c = super.read();
-		String string = "" + (char) c;
-		String decrypted = secure.decrypt(string);
+
+		String decrypted = secure.decrypt(Character.toString((char)c));
 		
 		return decrypted.charAt(0);
 	}
+	
+	public int read(char[] cbuf, int off, int len) throws IOException
+	{
+		int ret = super.read(cbuf, off, len);
+		
+		// decrypt string
+		String decrypted = secure.decrypt(new String(cbuf, off, len));
+		
+		// copy decrypted chars to buffer
+		decrypted.getChars(0, len, cbuf, off);
+		
+		return ret;
+	}
+	
+	
 }
