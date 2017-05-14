@@ -81,5 +81,10 @@ public class ArrayStack implements Stack {
 		}
 		return string;
 	}
+	
+	@Override
+	public int size(){
+		return this.counter;
+	}
 
 }

@@ -60,5 +60,10 @@ public class ListStack implements Stack {
 	public String toString(){
 		return this.list.toString();
 	}
+	
+	@Override
+	public int size(){
+		return this.list.size();
+	}
 
 }

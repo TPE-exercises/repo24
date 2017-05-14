@@ -6,16 +6,16 @@ public class ArrayQueue implements Queue {
 	protected boolean doubled;
 	protected int counter; // count objects in array
 
-	public ArrayQueue(int size) {
+	public ArrayQueue(int size){
 		this.array = new Object[size];
 		this.doubled = false;
 		this.counter = 0;
 	}
-
-	public ArrayQueue() {
+	
+	public ArrayQueue(){
 		this(10);
 	}
-
+	
 	@Override
 	public void enter(Object toInsert) throws Exception {
 
@@ -23,9 +23,8 @@ public class ArrayQueue implements Queue {
 			for (int i = counter; i > 0; i--) {
 				this.array[i] = this.array[i - 1];
 			}
-			counter++;
 			array[0] = toInsert;
-			
+			counter++;
 		} else if (this.doubled == false) {
 			Object[] newArray = new Object[this.array.length * 2];
 
@@ -38,8 +37,7 @@ public class ArrayQueue implements Queue {
 			this.doubled = true;
 			this.array = newArray;
 
-			throw new MyOverflowException("array needed to be doubled to length = " + this.array.length + ". ["
-					+ toInsert + "] added successfully.");
+			throw new MyOverflowException("array needed to be doubled to length = " + this.array.length+ ". [" + toInsert + "] added successfully.");
 		} else
 
 		{
@@ -72,15 +70,15 @@ public class ArrayQueue implements Queue {
 	}
 
 	@Override
-	public void empty() {
+	public void empty(){
 		this.counter = 0;
-		if (this.doubled = true) {
+		if(this.doubled = true){
 			Object[] newArray = new Object[this.array.length / 2];
 			this.doubled = false;
 			this.array = newArray;
 		}
 	}
-
+	
 	@Override
 	public boolean isEmpty() {
 		return counter == 0;
@@ -93,6 +91,11 @@ public class ArrayQueue implements Queue {
 			string += "[" + this.array[i] + "] ";
 		}
 		return string;
+	}
+	
+	@Override
+	public int size(){
+		return this.counter;
 	}
 
 }

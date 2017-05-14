@@ -27,6 +27,7 @@ public class MyutilMenu {
 			println("5: empty the stack");
 			println("6: isEmpty");
 			println("7: print");
+			println("8: size");
 
 			int input = readInt();
 			readLine();
@@ -87,6 +88,8 @@ public class MyutilMenu {
 			case 7:
 				println(stack.toString());
 				break;
+			case 8:
+				println("size = " + stack.size());
 
 			}
 		}
@@ -114,6 +117,7 @@ public class MyutilMenu {
 			println("5: empty the queue");
 			println("6: isEmpty");
 			println("7: print");
+			println("8: size");
 
 			int input = readInt();
 			readLine();
@@ -176,6 +180,8 @@ public class MyutilMenu {
 			case 7:
 				println(queue.toString());
 				break;
+			case 8:
+				println("size = " + queue.size());
 
 			}
 		}

@@ -34,5 +34,11 @@ public interface Stack {
 	 * @return
 	 */
 	boolean isEmpty();
+	
+	/**
+	 * return the amount of Objects in the stack
+	 * @return 
+	 */
+	int size();
 }
 

@@ -1,6 +1,6 @@
 package de.hsMannheim.tpe.ss17.gruppe24.uebung2.blatt2;
 
-interface Crypter {
+public interface Crypter {
 	/***
 	 * Enrypts a Message
 	 * @param message - The message to encrypt

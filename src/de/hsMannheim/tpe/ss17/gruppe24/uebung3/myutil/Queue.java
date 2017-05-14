@@ -37,4 +37,10 @@ public interface Queue {
 	 * @return
 	 */
 	boolean isEmpty();
+	
+	/**
+	 * return the amount of Objects in the queue
+	 * @return 
+	 */
+	int size();
 }
