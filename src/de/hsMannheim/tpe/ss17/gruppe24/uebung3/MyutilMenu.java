@@ -161,7 +161,7 @@ public class MyutilMenu {
 					println("[" + queue.front() + "] is at the front.");
 				} catch (Exception e) {
 					e.printStackTrace();
-					readLine();
+
 				}
 
 
