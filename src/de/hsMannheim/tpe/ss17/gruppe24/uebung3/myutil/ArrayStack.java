@@ -21,7 +21,7 @@ public class ArrayStack implements Stack {
 		if(this.counter < this.array.length){
 			array[counter++] = toInsert;
 		}
-		else if(this.doubled == false){
+		else if(!this.doubled){
 			Object[] newArray = new Object[this.array.length * 2];
 			
 			for(int i = 0; i < this.array.length; i++){

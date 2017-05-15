@@ -3,9 +3,37 @@ package de.hsMannheim.tpe.ss17.gruppe24.uebung2.blatt2;
 public class CrypterCaesar implements Crypter {
 
 	private int shift;
+	private char[] alphabet;
 	
 	public CrypterCaesar(int shift){
 		this.shift = shift;
+		
+		alphabet = new char[58];
+		for(int i = 0; i < 26; i++){
+			alphabet[i] = (char) ('a' + i); 
+		}
+		
+		for(int i = 0; i < 26; i++){
+			alphabet[i+26] = (char) ('A' + i); 
+		}
+		
+		alphabet[52] = 'Ä';
+		alphabet[53] = 'Ö';
+		alphabet[54] = 'Ü';
+		alphabet[55] = 'ä';
+		alphabet[56] = 'ö';
+		alphabet[57] = 'ü';
+	}
+	
+	private int findChar(char charakter){
+		
+		for(int i = 0; i < alphabet.length; i++){
+			if(alphabet[i] ==  charakter){
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 	
 	@Override
@@ -19,7 +47,9 @@ public class CrypterCaesar implements Crypter {
 		return stringOperation(message, -shift); 
 	}
 	
-	static private String stringOperation(String message, int shift){
+	private String stringOperation(String message, int shift){
+		
+		//test stuff abcxyzABCXYZäöüÄÖÜ
 		
 		String output = new String();
 		
@@ -27,37 +57,20 @@ public class CrypterCaesar implements Crypter {
 			
 			char character = message.charAt(i);
 			
-			if(character >= 'a' && character <= 'z'){
-				// in case we want to support lowercase letters properly, do this:
-				output += charOperation(character, shift, 'a', 'z');
+			int index = findChar(character);
+			
+			if(index == -1){
+				output += character; 
+			}
+			else{
+				int newindex = (index+shift) % alphabet.length;
+				if(newindex < 0) newindex += alphabet.length;
 				
-				// in case we want to do it like the senseless example, do this:
-				// character += 'A' - 'a';
+				output += alphabet[newindex];
 			}
 			
-			if(character >= 'A' && character <= 'Z'){
-				output += charOperation(character, shift, 'A', 'Z');
-			}
 		}
 
 		return output;
-	}
-	
-	static private char charOperation(char character, int shift, char alphabetStart, char alphabetEnd){
-		
-		int alphabetSize = 1 + alphabetEnd - alphabetStart;
-		
-		//get index of the character in the current alphabet
-		int characterIndex = character - alphabetStart; 
-		
-		//shift index by the amount of shift
-		characterIndex += shift; 
-		
-		//normalize out of bound index
-		characterIndex %= alphabetSize;
-		characterIndex = (characterIndex < 0) ? characterIndex + alphabetSize : characterIndex;
-		
-		//convert index back to actual char
-		return (char)(alphabetStart + characterIndex);
 	}
 }
