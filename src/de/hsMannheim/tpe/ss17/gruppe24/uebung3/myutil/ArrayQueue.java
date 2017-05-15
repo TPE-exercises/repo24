@@ -2,14 +2,18 @@ package de.hsMannheim.tpe.ss17.gruppe24.uebung3.myutil;
 
 public class ArrayQueue implements Queue {
 
-	protected Object[] array;
+	protected Object[] buffer;
+	protected int begin;
+	protected int count;
 	protected boolean doubled;
-	protected int counter; // count objects in array
-
-	public ArrayQueue(int size){
-		this.array = new Object[size];
-		this.doubled = false;
-		this.counter = 0;
+	
+	
+	public ArrayQueue(int capacity){
+		buffer = new Object[capacity];
+		begin = 0;
+		count = 0;
+		
+		doubled = false;
 	}
 	
 	public ArrayQueue(){
@@ -17,47 +21,58 @@ public class ArrayQueue implements Queue {
 	}
 	
 	@Override
-	public void enter(Object toInsert) throws Exception {
-
-		if (this.counter < this.array.length) {
-			for (int i = counter; i > 0; i--) {
-				this.array[i] = this.array[i - 1];
+	public void enter(Object toInsert) throws MyOverflowException {
+		if(count >= buffer.length){
+			
+			if(!doubled){
+				reserve(buffer.length * 2);
+				doubled = true;
+				throw new MyOverflowException("buffer doubled to length = " + buffer.length+ ". [" + toInsert + "] added successfully.");
 			}
-			array[0] = toInsert;
-			counter++;
-		} else if (this.doubled == false) {
-			Object[] newArray = new Object[this.array.length * 2];
-
-			for (int i = 0; i < this.array.length; i++) {
-				newArray[i + 1] = this.array[i];
+			else {
+				throw new MyOverflowException("buffer has already been doubled. " + toInsert + " could not be added.");
 			}
-
-			newArray[0] = toInsert;
-			this.counter++;
-			this.doubled = true;
-			this.array = newArray;
-
-			throw new MyOverflowException("array needed to be doubled to length = " + this.array.length+ ". [" + toInsert + "] added successfully.");
-		} else
-
-		{
-			throw new MyOverflowException(
-					"array is full and has already been doubled. " + toInsert + " could not be added.");
 		}
-
+	
+		buffer[(begin + count) % buffer.length] = toInsert;
+		
+		count++;
 	}
 
-	@Override
 	public Object leave() throws MyUnderflowException {
 
 		if (isEmpty()) {
 			throw new MyUnderflowException("Queue is empty. Underflow exception.");
 		}
 
-		// Set counter to the index of object to remove
-		counter--;
-		return this.array[counter];
+		Object element = buffer[begin];
+		
+		count--;
+		begin = (begin + 1) % buffer.length;
+		
+		return element;
 	}
+	
+	public void reserve(int newCapacity){
+		Object[] newBuffer = new Object[newCapacity];
+		
+		int newCount = 0;
+		
+		while (newCount < newCapacity){
+			
+			if(newCount >= count){
+				break;
+			}
+			
+			newBuffer[newCount] = buffer[begin + newCount];
+			newCount++;
+		}
+		
+		buffer = newBuffer;
+		begin = 0;
+		count = newCount;
+	}
+
 
 	@Override
 	public Object front() throws MyUnderflowException {
@@ -66,36 +81,37 @@ public class ArrayQueue implements Queue {
 			throw new MyUnderflowException("Queue is empty. Underflow exception.");
 		}
 
-		return this.array[this.counter - 1];
+		return buffer[begin];
 	}
 
 	@Override
 	public void empty(){
-		this.counter = 0;
-		if(this.doubled = true){
-			Object[] newArray = new Object[this.array.length / 2];
-			this.doubled = false;
-			this.array = newArray;
+		// set all elements to zero, we don't want to reference objects unnecessarily
+		for(int i = 0; i < buffer.length; i++){
+			buffer[i] = null;
 		}
+		
+		begin = 0; 
+		count = 0;
 	}
 	
 	@Override
 	public boolean isEmpty() {
-		return counter == 0;
-	}
-
-	@Override
-	public String toString() {
-		String string = "";
-		for (int i = 0; i < this.counter; i++) {
-			string += "[" + this.array[i] + "] ";
-		}
-		return string;
+		return count == 0;
 	}
 	
 	@Override
 	public int size(){
-		return this.counter;
+		return count;
 	}
-
+	
+	public String toString() {
+		String string = new String();
+		
+		for (int i = 0; i < this.count; i++) {
+			string += "[" + this.buffer[(begin + i) % buffer.length] + "] ";
+		}
+		
+		return string;
+	}
 }
