@@ -15,7 +15,6 @@ public class SorterRunnable implements Runnable {
 	@Override
 	public void run() {
 		ParallelQuickSort.parallelQuickSort(array, lowBound, highBound);
-
 	}
 
 }
