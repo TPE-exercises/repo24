@@ -1,10 +1,11 @@
 package de.hsMannheim.tpe.ss17.gruppe24.uebung4.aufgabe1;
 
 //Liveness Hazard
-//Ein Programm mit mehreren Threads kommt in einen Zustand, in dem es nicht mehr weiter geht 
-//Es kann oft nicht vorhergesagt werden wie lange ein Thread braucht, um zu beenden
-//Ein Beispiel ist ein Thread, der externe Daten beschafft. Mithilfe von isAlive()
-//kann abgefragt werden, ob der Thread noch laeuft
+//Ein Programm mit mehreren Threads kommt in einen Zustand, in dem es nicht mehr weiter geht.
+//Es kann oft nicht vorhergesagt werden, wie lange ein Thread braucht, um zu beenden.
+//Beispielprogramm:
+//Es wird ein Thread verwendet, um externe Daten zu beschaffen. Mithilfe von isAlive()
+//kann abgefragt werden, ob der Thread noch laeuft.
 //Dauert es zu lange, kann der Vorgang abgebrochen werden
 
 
@@ -18,7 +19,7 @@ public class Beispiel1 extends Thread {
 	
 	@Override
 	public void run(){
-		//Simuliert das warten auf eine externe Eingabe
+		//Simuliert das Warten auf eine externe Eingabe
 		try {
 			Thread.sleep((long)(5000 * Math.random()));
 		} catch (InterruptedException e) {

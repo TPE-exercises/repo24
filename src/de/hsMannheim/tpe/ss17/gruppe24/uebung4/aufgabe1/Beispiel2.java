@@ -3,10 +3,10 @@ package de.hsMannheim.tpe.ss17.gruppe24.uebung4.aufgabe1;
 
 //Safety Hazards: programm funktioniert durch Anwesenheit von mehreren Threads nicht mehr korrekt.
 //Wenn zwei threads mit den selben Daten arbeiten, muessen diese Zugriffe abgestimmt werden.
-//Das soll durch Synchronisation erreicht.
+//Das soll durch eine Synchronisation erreicht werden.
 //Beispielprogramm:
-//Ein thread lädt Daten in ein Array und der andere druckt sie aus. 
-//Alle Methoden, die auf das Array zugreifen, werden in einem synchronisierten Block ausgeführt.
+//Ein Thread laedt Daten in ein Array und der andere druckt sie aus. 
+//Alle Methoden, die auf das Array zugreifen, werden in einem synchronisierten Block ausgefuehrt.
 //Dadurch wird das Array nur gedruckt, wenn nicht gerade darauf geschrieben wird.
 
 

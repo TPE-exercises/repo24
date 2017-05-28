@@ -1,12 +1,12 @@
 package de.hsMannheim.tpe.ss17.gruppe24.uebung4.aufgabe1;
 
 //Performance Hazard
-//Programm funktioniert korrekt, die Performance ist trotz mehrerer Threads schlecht
+//Programm funktioniert korrekt, die Performance ist aber trotz mehrerer Threads schlecht
 //
 //Beispiel: Eine Aufgabe auf mehrere Threads aufteilen, die effektiver 
 //in einem Thread durchgefuert werden koennte. 
 //Die Performance wird durch Multithreading nicht verbessert, da in diesem Beispiel
-//die threads sowieso synchronisiert werden muessen.
+//die Threads sowieso synchronisiert werden muessen.
 
 public class Beispiel3 extends Thread {
 
@@ -49,7 +49,6 @@ public class Beispiel3 extends Thread {
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
