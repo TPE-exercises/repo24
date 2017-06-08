@@ -21,7 +21,7 @@ public class RingBuffer {
 			try{
 				wait();
 			} catch(InterruptedException e){
-				e.printStackTrace();
+				//System.out.println("put() interrupted");
 			}
 		}
 		
@@ -39,7 +39,7 @@ public class RingBuffer {
 			try{
 				wait();
 			} catch(InterruptedException e){
-				e.printStackTrace();
+				//System.out.println("get() interrupted");
 			}
 		}
 		
