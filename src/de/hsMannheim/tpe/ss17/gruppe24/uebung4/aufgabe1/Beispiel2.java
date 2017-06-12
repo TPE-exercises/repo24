@@ -5,23 +5,39 @@ package de.hsMannheim.tpe.ss17.gruppe24.uebung4.aufgabe1;
 //Wenn zwei threads mit den selben Daten arbeiten, muessen diese Zugriffe abgestimmt werden.
 //Das soll durch eine Synchronisation erreicht werden.
 //Beispielprogramm:
-//Ein Thread laedt Daten in ein Array und der andere druckt sie aus. 
-//Alle Methoden, die auf das Array zugreifen, werden in einem synchronisierten Block ausgefuehrt.
-//Dadurch wird das Array nur gedruckt, wenn nicht gerade darauf geschrieben wird.
+//Zwei Threads greifen ohne Synchronisation auf eine Variable zu.
+//Das ergebnis ist anders als man erwarten könnte ungleich 100000*2 ,
+// da es zu einer Racecondition kommt.
 
+public class Beispiel2 implements Runnable {
 
-public class Beispiel2 {
-
+	public int counter = 0;
+	
+	public void run(){
+		for(int i = 0; i < 100000; i++){
+			counter++;
+		}
+	}
+	
 	public static void main(String[] argv){
+		Beispiel2 bsp = new Beispiel2();
 		
-		int[] data = new int[10];
-		System.out.println("Program started");
-		GetRandomInts rng = new GetRandomInts(data);
-		PrintData printer = new PrintData(data);
+		Thread th1 = new Thread(bsp);
+		Thread th2 = new Thread(bsp);
 		
-		rng.start();
-		printer.start();
+
+		try {		
+			th1.start();
+			th2.start();
 		
+			th1.join();
+			th2.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(bsp.counter);
 		
 	}
 }
