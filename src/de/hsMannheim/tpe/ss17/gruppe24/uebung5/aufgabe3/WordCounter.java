@@ -68,6 +68,7 @@ public class WordCounter {
 		
 		return wordMap;
 	}
+
 	
 	
 	public static void main(String[] args) {
@@ -77,10 +78,11 @@ public class WordCounter {
 		// src/de/hsMannheim/tpe/ss17/gruppe24/uebung5/aufgabe3/shakespeare.txt
 		// src/de/hsMannheim/tpe/ss17/gruppe24/uebung5/aufgabe3/test.txt
 		
+		// Read Input file from console
 		File file = InputFile();
 		
+		
 		System.out.println("Counting words...");
-
 		long time = System.currentTimeMillis();
 
 		Map<String, Integer> wordMap = CreateWordMap(file);
@@ -90,31 +92,28 @@ public class WordCounter {
 		time = curTime;
 
 		
+		// Convert map to Linked List
 		List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(wordMap.entrySet());
 
-		
+		// Sort the List with a custom Comparator 
 		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
 			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-				int cmp = o2.getValue().compareTo(o1.getValue());
+				int cmp = o2.getValue().compareTo(o1.getValue()); // sort by count
 				if(cmp == 0){
-					return o1.getKey().compareTo(o2.getKey());
+					return o1.getKey().compareTo(o2.getKey()); // if count equals, sort by word
 				}
 				return cmp;
 			}
 		});
 		
-
-
 		curTime = System.currentTimeMillis();
-		System.out.println("Sorting the generated List took" + (curTime - time) + "ms");
+		System.out.println("Sorting the generated List took " + (curTime - time) + "ms");
 
+		// print the fist 100 entries
 		for (int i = 0; i < 100 && i < list.size(); i++) {
-
 			Map.Entry<String, Integer> entry = list.get(i);
-
 			System.out.println(i + 1 + ". Count:" + entry.getValue() + " World:" + entry.getKey());
 		}
-
 	}
 
 }
