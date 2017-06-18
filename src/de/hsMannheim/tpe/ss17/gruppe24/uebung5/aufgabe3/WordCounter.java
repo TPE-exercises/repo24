@@ -72,6 +72,11 @@ public class WordCounter {
 	
 	public static void main(String[] args) {
 
+		// Test Files:
+		// src/de/hsMannheim/tpe/ss17/gruppe24/uebung5/aufgabe3/bibel.txt
+		// src/de/hsMannheim/tpe/ss17/gruppe24/uebung5/aufgabe3/shakespeare.txt
+		// src/de/hsMannheim/tpe/ss17/gruppe24/uebung5/aufgabe3/test.txt
+		
 		File file = InputFile();
 		
 		System.out.println("Counting words...");
@@ -87,11 +92,18 @@ public class WordCounter {
 		
 		List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(wordMap.entrySet());
 
+		
 		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
 			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-				return (o2.getValue()).compareTo(o1.getValue());
+				int cmp = o2.getValue().compareTo(o1.getValue());
+				if(cmp == 0){
+					return o1.getKey().compareTo(o2.getKey());
+				}
+				return cmp;
 			}
 		});
+		
+
 
 		curTime = System.currentTimeMillis();
 		System.out.println("Sorting the generated List took" + (curTime - time) + "ms");
