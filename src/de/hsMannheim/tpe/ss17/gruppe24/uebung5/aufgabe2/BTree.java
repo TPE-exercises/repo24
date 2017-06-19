@@ -2,18 +2,15 @@ package de.hsMannheim.tpe.ss17.gruppe24.uebung5.aufgabe2;
 
 import static gdi.MakeItSimple.*;
 
-public class BTree2<T extends Comparable<T>> implements Iterable<T> {
+public class BTree<T extends Comparable<T>> implements Iterable<T> {
 
 	private Node<T> root;
 	private int order;
 
 	// Helper field for getAll()
 	private int dataIndex;
-
 	
-	
-	
-	public BTree2(int order) {
+	public BTree(int order) {
 		if (order < 1)
 			this.order = 1;
 		else
@@ -153,7 +150,6 @@ public class BTree2<T extends Comparable<T>> implements Iterable<T> {
 
 	/**
 	 * When the correct node is already found the new Comparable reference is added
-	 * 
 	 * @param node
 	 * @param valueToInsert
 	 */
@@ -322,7 +318,7 @@ public class BTree2<T extends Comparable<T>> implements Iterable<T> {
 	}
 
 
-	public void addAll(BTree2 otherTree) {
+	public void addAll(BTree otherTree) {
 		if (otherTree != null) {
 			Comparable[] data = otherTree.getAll();
 
@@ -420,8 +416,8 @@ public class BTree2<T extends Comparable<T>> implements Iterable<T> {
 	}
 
 	@Override
-	public BTree2 clone() {
-		BTree2 clone = new BTree2(this.order);
+	public BTree clone() {
+		BTree clone = new BTree(this.order);
 
 		if (this.root == null) {
 			return clone;
